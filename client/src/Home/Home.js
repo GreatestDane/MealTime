@@ -17,12 +17,18 @@ class Home extends Component {
     };
 
     render() {
-        return(
+        return (
             <div>
-                <div id="meal-search-content">
-                    <h2>Welcome to the random meal generator</h2>
-                    <p>Have a hungry family to feed but don't know what to make for dinner?</p>
-                    <p>Simply give our random meal generator button a click and prepare to be inspired!</p>
+                <div className="flex-container">
+                    <div id="meal-search-content">
+                        <h2>Welcome to the random meal generator</h2>
+                        <p>Have a hungry family to feed but don't know what to make for dinner?</p>
+                        <p>Simply give our random meal generator button a click and prepare to be inspired!</p>
+                        <button className="btn btn-danger btn-lg">Get my meal</button>
+                    </div>
+                    <div id="meal-search-result">
+                        {this.state.recipe}
+                    </div>
                 </div>
             </div>
         )

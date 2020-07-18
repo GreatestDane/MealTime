@@ -3,11 +3,30 @@ body {
     background-repeat: no-repeat;
 }
 
+.flex-container {
+    display: flex;
+}
+
 #meal-search-content {
     background: black;
     color: rgb(255, 5, 201); 
     width: 300px;
-    height: 500px;
-    margin: 30px 0px 0px 20px;
+    height: 400px;
+    margin: 30px 0px 0px 300px;
     padding: 10px 15px 0px 15px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
+}
+
+#meal-search-result {
+    background: black;
+    color: rgb(255, 5, 201); 
+    width: 300px;
+    height: 400px;
+    margin: 30px 0px 0px 150px;
+    padding: 10px 15px 0px 15px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
 }
