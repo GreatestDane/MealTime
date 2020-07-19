@@ -6,7 +6,10 @@ class Home extends Component {
         recipe: null,
         mealName: null,
         ingredients: [],
-        mealimage: "/images/black.jpg"
+        measurements: [],
+        mealimage: "/images/black.jpg",
+        instructions: null,
+        youtube: null
     }
 
     //Fetch data from meal API to set to state when button is clicked
@@ -19,22 +22,36 @@ class Home extends Component {
             //Create array of ingredients to set to state
             let ingredientsArray = [];
             for (let i = 1;  i < 20; i++) {
-                if (data.meals[0][`strIngredient${i}`] === "") {
-                    console.log("empty string");
+                if (data.meals[0][`strIngredient${i}`] === "" || data.meals[0][`strIngredient${i}`] === null) {
+                    console.log("empty ingredient string");
                 }
                 else {
                     ingredientsArray.push(data.meals[0][`strIngredient${i}`]);
                 }
+            };
 
-            }
+             //Create array of measurements to set to state
+             let measureArray = [];
+             for (let i = 1;  i < 20; i++) {
+                 if (data.meals[0][`strMeasure${i}`] === "" || data.meals[0][`strMeasure${i}`] === null) {
+                     console.log("empty measurement string");
+                 }
+                 else {
+                     measureArray.push(data.meals[0][`strMeasure${i}`]);
+                 }
+ 
+             }
 
-            console.log(ingredientsArray);
+            console.log(measureArray);
 
             this.setState({ 
                 recipe: data.meals[0],
                 mealName: data.meals[0].strMeal,
                 ingredients: ingredientsArray,
-                mealimage: data.meals[0].strMealThumb
+                measurements: measureArray,
+                mealimage: data.meals[0].strMealThumb,
+                instructions: data.meals[0].strInstructions,
+                youtube: data.meals[0].strYoutube
             });
             console.log(this.state.recipe);
             console.log(this.state.recipe.strMeal);
@@ -42,20 +59,22 @@ class Home extends Component {
         }
         )
     }
-    //end fetch
 
-    //Map element to render ingredients
+
+    //Map element to render ingredients and ingredient measurements
     renderIngredients = () => {
         const ingredients = this.state.ingredients.map((element, i) => {
+            const measure = this.state.measurements[i]
             return (
                 <li key={i}>
-                    {element}
+                    {element}: {measure}
                 </li>
             )
         })
         return ingredients;
     }
-    //End ingredient map
+
+    
 
     render() {
         return (
@@ -73,6 +92,8 @@ class Home extends Component {
                         <ol>
                             {this.renderIngredients()}
                         </ol>
+                        <p id="instructions">{this.state.instructions}</p>
+                        <iframe width="560" height="315" src={this.state.youtube} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
