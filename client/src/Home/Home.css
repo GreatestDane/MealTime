@@ -30,3 +30,12 @@ body {
     border-color: white;
     border-radius: 10px;
 }
+
+h2 {
+    color: white;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
