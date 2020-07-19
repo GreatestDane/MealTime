@@ -1,12 +1,25 @@
+
 #header {
     width: 100%;    
-    height: 120px;
+    height: 125px;
     background: black;
     box-sizing: border-box;
+    border-bottom: white solid;
 }
 
 #eat {
+    margin-left: 130px;
     height: 120px;
     width: 120px;
-    margin-left: 45%;
+}
+
+h3 {
+    margin-left: 20px;
+    margin-top: 40px;
+    color: white;
+}
+
+h5 {
+    margin-top: 50px;
+    color: white;
 }
