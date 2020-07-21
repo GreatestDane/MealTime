@@ -10,10 +10,16 @@ const PORT = process.env.PORT || 8080;
 
 
 //URI to connect server to MongoDB Atlas
-const MONGODB_URI = 'mongodb+srv://DaneGoodman:<Irvine000>@recipesdb.bqo2e.mongodb.net/<dbname>?retryWrites=true&w=majority'
+const MONGODB_URI =  "mongodb+srv://DaneGoodman:Irvine000@recipesdb.bqo2e.mongodb.net/recipesdb?retryWrites=true&w=majority"
 
-//Set up Mongoose connection
-mongoose.connect(MONGODB_URI || 'mongodb://localhost/recipes', {
+//Set up Mongoose connection if Mongo shell is not installed (commented out for now because shell is installed)
+// mongoose.connect(MONGODB_URI || 'mongodb://localhost/recipes', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+
+//Going to try setting up the connection without MONGODB_URI and see if I can save data
+mongoose.connect('mongodb://localhost:27017/blogpost', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -22,7 +28,7 @@ mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
 });
 
-//Setup Schema for mongoose
+// //Setup Schema for mongoose
 const Schema = mongoose.Schema;
 const BlogPostSchema = new Schema({
     title: String,
@@ -45,14 +51,14 @@ const data = {
 // .save()
 const newBlogPost = new BlogPost(data); //instance of the model
 
-newBlogPost.save((error) => {
-    if(error) {
-        console.log('OOPS! There has been an error');
-    }
-    else {
-        console.log('Data has been saved!')
-    }
-});
+// newBlogPost.save((error) => {
+//     if(error) {
+//         console.log('OOPS! There has been an error');
+//     }
+//     else {
+//         console.log('Data has been saved!')
+//     }
+// });
 
 
 
@@ -71,7 +77,16 @@ app.get('/api', (req, res) => {
         username: 'Dane',
         age: 35
     };
-    res.json(data);
+
+    BlogPost.find({})
+    .then((data) => {
+        console.log('Data: ', data)
+        res.json(data);
+    })
+    .catch((error) => {
+        console.log('Error: ', error)
+    })
+
 });
 
 app.get('/api/name', (req, res) => {
